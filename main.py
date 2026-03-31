@@ -6,9 +6,6 @@ from database import (
     get_car_by_id, update_car, delete_car, search_cars
 )
 
-# -------------------------
-# Меню
-# -------------------------
 def show_menu():
     print("\n" + "="*40)
     print("   🚗  CAR DEALERSHIP MANAGER")
@@ -20,14 +17,11 @@ def show_menu():
     print("5. Search Cars")
     print("6. Statistics")
     print("7. Filter by price")
-    print("8. Exit")
-    print("9. Export inventory to CSV")
+    print("8. Export inventory to CSV")
+    print("9. Exit")
     return input("Make your choice:\n").strip()
 
 
-# -------------------------
-# Flow-функции
-# -------------------------
 def add_car_flow():
     try:
         make = input("Make: ")
@@ -174,10 +168,10 @@ def show_statistics():
     total = len(cars)
     avg_price = sum(c.price for c in cars) / total
 
-    makes = [c.make for c in cars if c.make]  # фильтруем пустые / None
+    makes = [c.make for c in cars if c.make] 
     most_common_make = Counter(makes).most_common(1)[0][0] if makes else "N/A"
 
-    print("\n📊 Inventory Statistics:")
+    print("\n Inventory Statistics:")
     print(f"Total cars: {total}")
     print(f"Average price: ${avg_price:,.2f}")
     print(f"Most common make: {most_common_make}")
@@ -221,9 +215,6 @@ def export_to_csv():
     print(f"Inventory exported to {filename}")
 
 
-# -------------------------
-# Main loop
-# -------------------------
 def main():
     initialize_database()
     import_cars()
@@ -245,10 +236,11 @@ def main():
         elif choice == "7":
             price_filter_flow()
         elif choice == "8":
+            export_to_csv()    
+        elif choice == "9":
             print("Goodbye! 👋")
             break
-        elif choice == "9":
-            export_to_csv()
+        
         else:
             print("Invalid choice. Please enter 1–9.")
 
